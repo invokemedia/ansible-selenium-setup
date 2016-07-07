@@ -1,0 +1,36 @@
+---
+- name: Download the gecko driver
+  get_url: url="https://github.com/mozilla/geckodriver/releases/download/v{{ gecko_version }}/geckodriver-v{{ gecko_version }}-mac.tar.gz" dest=/tmp mode=0777
+
+- name: Install the gecko driver
+  unarchive: src="/tmp/geckodriver-v{{ gecko_version }}-mac.tar.gz" dest=/usr/local/bin/ mode=0700 copy=no
+
+- name: Download the chrome driver
+  get_url: url="http://chromedriver.storage.googleapis.com/{{ chrome_version }}/chromedriver_mac32.zip" dest=/tmp mode=0777
+
+- name: Install the chrome driver
+  unarchive: src=/tmp/chromedriver_mac32.zip dest=/usr/local/bin/ mode=0700 copy=no
+
+- name: Download the safari extension
+  get_url: url="http://selenium-release.storage.googleapis.com/{{ safari_version }}/SafariDriver.safariextz" dest=/tmp mode=0777
+
+- name: Open the safari extension
+  command: open /tmp/SafariDriver.safariextz
+
+- name: Download selenium zip
+  get_url: url="https://github.com/SeleniumHQ/selenium/archive/{{ selenium_version }}.zip" dest=/tmp mode=0777
+
+- name: Unzip selenium
+  unarchive: src="/tmp/selenium-{{ selenium_version }}.zip" dest=/tmp mode=0700 copy=no
+
+- name: Build Selenium
+  command: ./go clean release
+  args:
+    chdir: "/tmp/selenium-{{ selenium_version }}/"
+    creates: "/tmp/selenium-{{ selenium_version }}/build/dist/selenium-server-standalone-{{ selenium_version }}.jar"
+
+- name: Move Selenium build
+  command: mv "selenium-server-standalone-{{ selenium_version }}.jar" ~/Desktop/selenium-server.jar
+  args:
+    chdir: "/tmp/selenium-{{ selenium_version }}/build/dist/"
+    creates: ~/Desktop/selenium-server.jar
