@@ -30,7 +30,10 @@
     creates: "/tmp/selenium-{{ selenium_version }}/build/dist/selenium-server-standalone-{{ selenium_version }}.jar"
 
 - name: Move Selenium build
-  command: mv "selenium-server-standalone-{{ selenium_version }}.jar" ~/Desktop/selenium-server.jar
+  command: mv "selenium-server-standalone-{{ selenium_version }}.jar" /usr/local/bin/selenium-server.jar
   args:
     chdir: "/tmp/selenium-{{ selenium_version }}/build/dist/"
-    creates: ~/Desktop/selenium-server.jar
+    creates: /usr/local/bin/selenium-server.jar
+
+- name: Create script for selenium
+  template: src=selenium dest=/usr/local/bin/selenium-server.jar mode=0700

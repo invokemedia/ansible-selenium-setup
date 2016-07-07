@@ -49,15 +49,7 @@ Here is how you would use the default setup setup.
 
 Then use `ansible-playbook playbook.yml -i 'localhost,'` to play.
 
-This will create the selenium server jar on your desktop.
-
-You can now run the server with the following: `java -jar selenium-server.jar`
-
-You can also alias the function in a `~/.bashrc` or `~/.zshrc` with:
-
-```sh
-alias selenium="java -jar /path/to/the/server/selenium-server.jar"
-```
+This will create a `selenium-server.jar` in `/usr/local/bin/` and also create a `/usr/local/bin/selenium` which is a script that you can use to simply launch the server.
 
 License
 -------
