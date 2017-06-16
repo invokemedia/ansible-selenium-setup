@@ -20,13 +20,13 @@ Role Variables
 # these ARE NOT browser versions! These are the versions of the drivers to download and install
 
 # geck driver version
-gecko_version: 0.9.0
+gecko_version: 0.17.0
 # chrome driver version
-chrome_version: 2.22
+chrome_version: 2.9
 # safari driver version
-safari_version: 2.45
+safari_version: 2.48
 # selenium driver version
-selenium_version: 2.53.1
+selenium_version: 3.4.0
 ```
 
 Dependencies
